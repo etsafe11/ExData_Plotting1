@@ -1,6 +1,5 @@
 # Coursera Exploratory Data Analysis - Week 1 Project
 # Plot 2 - Global Active Power Line Chart
-setwd("C://Users/etsaf/OneDrive/zzzCoursera/courseraWorkingDirectories/exploratoryData/week1project")
 data <- read.table("./household_power_consumption.txt", 
                      header = TRUE, 
                      sep = ";",
