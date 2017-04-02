@@ -15,4 +15,3 @@ hist(data$Global_active_power,
      main = "Global Active Power")
 dev.copy(png, file = "plot1.png") # copies myplot to a PNG device
 dev.off()  # Don't forget to close the PNG device!!!
-
