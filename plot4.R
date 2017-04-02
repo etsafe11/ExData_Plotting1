@@ -9,13 +9,14 @@ data <- read.table("./household_power_consumption.txt",
 names(data) <- list("Date", "Time", "Global_active_power",
                     "Global_reactive_power", "Voltage", "Global_intensity",
                     "Sub_metering_1", "Sub_metering_2", "Sub_metering_3")
-data$Time2 <- paste(data$Date, data$Time, sep=" ")
-data$Time3 <- 1:length(data$Time2)
+data$Time2 <-paste(data$Date, data$Time)
+
 # Set up the plot
 library(ggplot2)
-p1 <- ggplot(data, aes(data$Time3, Global_active_power)) + geom_line() +
-  xlab("") + ylab("Global Active Power")
-p2 <- ggplot(data, aes(x = data$Time3)) + 
+p1 <- ggplot(data, aes(strptime(data$Time2, "%d/%m/%Y %H:%M:%S"), 
+          Global_active_power)) + geom_line() +
+          xlab("") + ylab("Global Active Power")
+p2 <- ggplot(data, aes(strptime(data$Time2, "%d/%m/%Y %H:%M:%S"))) + 
   geom_line(aes(y = data$Sub_metering_1, color="Sub_metering_1")) + 
   geom_line(aes(y = data$Sub_metering_2, color="Sub_metering_2")) + 
   geom_line(aes(y = data$Sub_metering_3, color="Sub_metering_3")) + 
@@ -23,9 +24,11 @@ p2 <- ggplot(data, aes(x = data$Time3)) +
   xlab("") +
   theme(legend.title = element_blank(), 
         legend.justification = c(0, 1), legend.position = c(.5, .9)) 
-p3 <- ggplot(data, aes(data$Time3, Voltage)) + geom_line() +
-  xlab("") + ylab("Voltage")
-p4 <- ggplot(data, aes(data$Time3, Global_reactive_power)) + geom_line() +
+p3 <- ggplot(data, aes(strptime(data$Time2, "%d/%m/%Y %H:%M:%S"), 
+        Voltage)) + geom_line() +
+        xlab("") + ylab("Voltage")
+p4 <- ggplot(data, aes(strptime(data$Time2, "%d/%m/%Y %H:%M:%S"), 
+        Global_reactive_power)) + geom_line() +
   xlab("") + ylab("Global Reactive Power")
 # Arrange the plots on a single page
 library(gridExtra)
